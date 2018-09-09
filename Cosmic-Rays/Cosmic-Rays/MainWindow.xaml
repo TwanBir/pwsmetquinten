@@ -14,6 +14,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="button" Content="Button" Grid.Row="1"/>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="357" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="762"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="476,182,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
 
     </Grid>
