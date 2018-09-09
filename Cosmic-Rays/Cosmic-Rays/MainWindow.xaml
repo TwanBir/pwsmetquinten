@@ -12,9 +12,10 @@
                 <RowDefinition Height="367*"/>
                 <RowDefinition Height="32*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="button" Content="Button" Grid.Row="1"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="357" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="762"/>
+            <Button x:Name="button" Content="Button" Grid.Row="1" Click="button_Click"/>
+            <DataGrid x:Name="dataGrid"/>
         </Grid>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="100" Margin="302,85,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>

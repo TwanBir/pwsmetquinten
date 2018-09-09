@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json.Linq;
 
 namespace Cosmic_Rays
 {
@@ -25,6 +26,21 @@ namespace Cosmic_Rays
             InitializeComponent();
         }
 
-        
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                var json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                JArray jArray = JArray.Parse(json);
+                foreach (JObject item in jArray.Children())
+                {
+                    string name = (string)item.SelectToken("name");
+                    string id = (string)item.SelectToken("number");
+                }
+                
+
+
+            }
+        }
     }
 }
