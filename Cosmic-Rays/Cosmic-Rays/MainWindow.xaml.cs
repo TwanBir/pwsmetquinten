@@ -40,8 +40,14 @@ namespace Cosmic_Rays
                 {
                     string name = (string)item.SelectToken("name");
                     string id = (string)item.SelectToken("number");
+                    
                 }
                 textBox.Text = stations[1].stationName;
+                for (int i = 0; i < stations.Count; i++)
+                {
+                    dataGridXAML.Items.Add(stations[i]);
+                }
+                
             }
         }
 
