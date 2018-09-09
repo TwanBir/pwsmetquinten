@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cosmic_Rays"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MaxWidth="800">
     <Grid>
-        
+        <Grid Height="399" Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="367*"/>
+                <RowDefinition Height="32*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="button" Content="Button" Grid.Row="1"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="357" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="762"/>
+        </Grid>
+
     </Grid>
 </Window>

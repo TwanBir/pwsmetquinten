@@ -24,5 +24,7 @@ namespace Cosmic_Rays
         {
             InitializeComponent();
         }
+
+        
     }
 }
