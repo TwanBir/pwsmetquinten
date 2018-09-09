@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System.Data;
 
 namespace Cosmic_Rays
 {
@@ -32,15 +35,23 @@ namespace Cosmic_Rays
             {
                 var json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
                 JArray jArray = JArray.Parse(json);
+                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
                 foreach (JObject item in jArray.Children())
                 {
                     string name = (string)item.SelectToken("name");
                     string id = (string)item.SelectToken("number");
                 }
-                
-
-
+                textBox.Text = stations[1].stationName;
             }
+        }
+
+        public class Station
+        {
+            [JsonProperty("number")]
+            public string stationID { get; set; }
+
+            [JsonProperty("name")]
+            public string stationName { get; set; }
         }
     }
 }
