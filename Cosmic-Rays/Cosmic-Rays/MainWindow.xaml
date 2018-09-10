@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800" MaxWidth="800">
     <Grid Height="399" Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="445*"/>
-            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="409*"/>
+            <ColumnDefinition Width="260*"/>
             <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,9 +18,9 @@
             <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <Button x:Name="findStation" Content="Button" Click="button_Click" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <DataGrid x:Name="stationGrid" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Grid.ColumnSpan="2">
+        <DataGrid x:Name="stationGrid" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Grid.ColumnSpan="2" IsTextSearchEnabled="True" VerticalScrollBarVisibility="Visible" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding stationName}" ClipboardContentBinding="{x:Null}" Header="Nijmeegse Scholengemeenschap Groenewoud" Width="260"/>
+                <DataGridTextColumn Binding="{Binding stationName}" ClipboardContentBinding="{x:Null}" Header="Station naam" Width="260"/>
                 <DataGridTextColumn Binding="{Binding stationID}" ClipboardContentBinding="{x:Null}" Header="Station ID" Width="70"/>
             </DataGrid.Columns>
         </DataGrid>
