@@ -35,6 +35,11 @@ namespace Cosmic_Rays
             LoadStations();
         }
 
+        private void stationDateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateActiveStations();
+        }
+
         public class Station
         {
             [JsonProperty("number")]
@@ -43,7 +48,7 @@ namespace Cosmic_Rays
             [JsonProperty("name")]
             public string stationName { get; set; }
 
-            //public bool activeStation { get; set; }
+            public bool activeStation { get; set; }
             //
             //public static readonly Station Default = new Station()
             //{
@@ -52,6 +57,41 @@ namespace Cosmic_Rays
         }
 
         public void LoadStations()
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
+                for (int i = 0; i < stations.Count; i++)
+                {
+                    stationGrid.Items.Add(stations[i]);
+                }
+            }
+        }
+
+        public void UpdateActiveStations()
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
+                string json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
+                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
+                foreach (List value in stationGrid.Items)
+                {
+                    for (int i = 0; i < stations.Count; i++)
+                    {
+                        if (value.name == stations[i].stationName)
+                        {
+                            value.activeStation = true;
+                        }
+                    }
+                }
+
+            }
+        }
+        
+
+        public void LoadStations_old()
         {
             using (var webClient = new System.Net.WebClient())
             {
@@ -87,5 +127,7 @@ namespace Cosmic_Rays
 
             }
         }
+
+        
     }
 }
