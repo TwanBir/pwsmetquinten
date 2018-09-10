@@ -50,11 +50,11 @@ namespace Cosmic_Rays
         {
             using (var webClient = new System.Net.WebClient())
             {
-                //gets json file
+                // gets json file
                 string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
                 //converts .json to list of objects of class Station
                 List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
-                //loops to objects to add them to the datagrid
+                // loops to objects to add them to the datagrid
                 for (int i = 0; i < stations.Count; i++)
                 {
                     stationGrid.Items.Add(stations[i]);
@@ -66,45 +66,43 @@ namespace Cosmic_Rays
         {
             using (var webClient = new System.Net.WebClient())
             {
-                stationGrid.Items.Clear();
-                string jsonall = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
-                List<Station> allStations = JsonConvert.DeserializeObject<List<Station>>(jsonall);
+                // checks of set date is earlier then today
                 if (stationDateFilter.SelectedDate < DateTime.Now)
                 {
+                    // makes it so that the variable dateTimeFilter always has a value
                     DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
+                    // gets raw json data from the server
                     string json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
+                    // converts json data to .net list
                     List<Station> stationsActive = JsonConvert.DeserializeObject<List<Station>>(json);
-
-                    for (int x = 0; x < allStations.Count; x++)
+                    // loops thru all items in datagrid
+                    foreach (var item in stationGrid.Items.OfType<Station>())
                     {
+                        // loops thru all items in activestation list
                         for (int i = 0; i < stationsActive.Count; i++)
                         {
-                            if (stationsActive[i].stationName == allStations[x].stationName)
+                            // if 2 names mach station is marked active and function will break
+                            if (stationsActive[i].stationName == item.stationName)
                             {
-                                allStations[x].activeStation = true;
+                                item.activeStation = true;
                                 break;
                             }
-                            else
-                            {
-                                allStations[x].activeStation = false;
-                            }
                         }
-                        stationGrid.Items.Add(allStations[x]);
                     }
-
                 }
+                // if the date set by user is in the future (must revise when time travel is within reach)
                 else
                 {
-                    for (int x = 0; x < allStations.Count; x++)
+                    // sets the flags from all rows to false
+                    foreach (var item in stationGrid.Items.OfType<Station>())
                     {
-                        stationGrid.Items.Add(allStations[x]);
+                        item.activeStation = false;
                     }
-                }    
-
+                }
             }
         }
         
-
+        // Legacy code, remove when in need of more space
         public void LoadStations_old()
         {
             using (var webClient = new System.Net.WebClient())
