@@ -30,11 +30,6 @@ namespace Cosmic_Rays
             LoadStations();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            LoadStations();
-        }
-
         private void stationDateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateActiveStations();
@@ -49,19 +44,17 @@ namespace Cosmic_Rays
             public string stationName { get; set; }
 
             public bool activeStation { get; set; }
-            //
-            //public static readonly Station Default = new Station()
-            //{
-            //    activeStation = true;
-            //};
         }
 
         public void LoadStations()
         {
             using (var webClient = new System.Net.WebClient())
             {
+                //gets json file
                 string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                //converts .json to list of objects of class Station
                 List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
+                //loops to objects to add them to the datagrid
                 for (int i = 0; i < stations.Count; i++)
                 {
                     stationGrid.Items.Add(stations[i]);
@@ -73,19 +66,40 @@ namespace Cosmic_Rays
         {
             using (var webClient = new System.Net.WebClient())
             {
-                DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
-                string json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
-                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
-                foreach (List value in stationGrid.Items)
+                stationGrid.Items.Clear();
+                string jsonall = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
+                List<Station> allStations = JsonConvert.DeserializeObject<List<Station>>(jsonall);
+                if (stationDateFilter.SelectedDate < DateTime.Now)
                 {
-                    for (int i = 0; i < stations.Count; i++)
+                    DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
+                    string json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
+                    List<Station> stationsActive = JsonConvert.DeserializeObject<List<Station>>(json);
+
+                    for (int x = 0; x < allStations.Count; x++)
                     {
-                        if (value.name == stations[i].stationName)
+                        for (int i = 0; i < stationsActive.Count; i++)
                         {
-                            value.activeStation = true;
+                            if (stationsActive[i].stationName == allStations[x].stationName)
+                            {
+                                allStations[x].activeStation = true;
+                                break;
+                            }
+                            else
+                            {
+                                allStations[x].activeStation = false;
+                            }
                         }
+                        stationGrid.Items.Add(allStations[x]);
                     }
+
                 }
+                else
+                {
+                    for (int x = 0; x < allStations.Count; x++)
+                    {
+                        stationGrid.Items.Add(allStations[x]);
+                    }
+                }    
 
             }
         }
@@ -127,7 +141,5 @@ namespace Cosmic_Rays
 
             }
         }
-
-        
     }
 }
