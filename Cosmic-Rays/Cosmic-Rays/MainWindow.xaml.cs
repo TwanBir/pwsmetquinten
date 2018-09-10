@@ -31,24 +31,7 @@ namespace Cosmic_Rays
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            using (var webClient = new System.Net.WebClient())
-            {
-                var json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
-                JArray jArray = JArray.Parse(json);
-                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
-                foreach (JObject item in jArray.Children())
-                {
-                    string name = (string)item.SelectToken("name");
-                    string id = (string)item.SelectToken("number");
-                    
-                }
-                textBox.Text = stations[1].stationName;
-                for (int i = 0; i < stations.Count; i++)
-                {
-                    dataGridXAML.Items.Add(stations[i]);
-                }
-                
-            }
+            LoadStations();
         }
 
         public class Station
@@ -58,6 +41,43 @@ namespace Cosmic_Rays
 
             [JsonProperty("name")]
             public string stationName { get; set; }
+        }
+
+        public void LoadStations()
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                stationGrid.Items.Clear();
+                string json = null;
+                if (stationDateFilter.SelectedDate > DateTime.Now) { return; }
+                else if (stationDateFilter.Text == "")
+                { 
+                    json = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
+                }
+                    else
+                {
+
+                    DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
+                    textBox.Text = dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd");
+                    //json = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
+                    json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
+                }
+                //var json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                //JArray jArray = JArray.Parse(json);
+                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
+                //foreach (JObject item in jArray.Children())
+                //{
+                //    string name = (string)item.SelectToken("name");
+                //    string id = (string)item.SelectToken("number");
+                //
+                //}
+                //textBox.Text = stations[1].stationName;
+                for (int i = 0; i < stations.Count; i++)
+                {
+                    stationGrid.Items.Add(stations[i]);
+                }
+
+            }
         }
     }
 }
