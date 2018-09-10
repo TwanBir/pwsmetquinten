@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:Cosmic_Rays"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MaxWidth="800">
-    <Grid>
-        <Grid Height="399" Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
+    <Grid Height="399" Margin="10,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
             <Grid.RowDefinitions>
                 <RowDefinition Height="367*"/>
                 <RowDefinition Height="32*"/>
@@ -17,11 +16,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding stationName}" ClipboardContentBinding="{x:Null}" Header="Station naam"/>
                     <DataGridTextColumn Binding="{Binding stationID}" ClipboardContentBinding="{x:Null}" Header="Station ID"/>
-                    <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Gebruiken?"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="193,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         </Grid>
-
-    </Grid>
 </Window>
