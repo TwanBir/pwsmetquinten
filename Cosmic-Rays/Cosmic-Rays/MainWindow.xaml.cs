@@ -27,6 +27,7 @@ namespace Cosmic_Rays
         public MainWindow()
         {
             InitializeComponent();
+            LoadStations();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,13 @@ namespace Cosmic_Rays
 
             [JsonProperty("name")]
             public string stationName { get; set; }
+
+            //public bool activeStation { get; set; }
+            //
+            //public static readonly Station Default = new Station()
+            //{
+            //    activeStation = true;
+            //};
         }
 
         public void LoadStations()
