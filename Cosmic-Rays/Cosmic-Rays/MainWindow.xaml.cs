@@ -30,13 +30,11 @@ namespace Cosmic_Rays
         {
             InitializeComponent();
             stationGrid.ItemsSource = new StationList().GetStations();
-            stationGrid.group
-            
         }
 
         private void stationDateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //UpdateActiveStations();
+            UpdateActiveStations();
         }
 
         public class StationList
@@ -72,7 +70,7 @@ namespace Cosmic_Rays
         }
 
 
-        /*public void UpdateActiveStations()
+        public void UpdateActiveStations()
         {
             using (var webClient = new System.Net.WebClient())
             {
@@ -111,6 +109,6 @@ namespace Cosmic_Rays
                 }
                 stationGrid.Items.Refresh();
             }
-        }*/
+        }
     }
 }
