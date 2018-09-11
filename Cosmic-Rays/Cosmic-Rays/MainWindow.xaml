@@ -37,7 +37,6 @@
                 </GroupStyle>
             </DataGrid.GroupStyle>
         </DataGrid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="193,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <DatePicker x:Name="stationDateFilter" Grid.Column="2" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" AutomationProperties.HelpText="Selecteer een datum om alleen stations te tonen die die dag actief waren" Height="24" SelectedDateFormat="Short" SelectedDateChanged="stationDateFilter_SelectedDateChanged"/>
         <TextBlock x:Name="textBlock" Grid.Row="1" TextWrapping="Wrap" Text="Voer een datum in om te filteren welke stations actief zijn. Laat leeg voor alle stations" Grid.Column="1" TextAlignment="Center" Margin="10,0" Foreground="White"/>
     </Grid>
