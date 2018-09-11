@@ -29,30 +29,51 @@ namespace Cosmic_Rays
         public MainWindow()
         {
             InitializeComponent();
-            stationGrid.ItemsSource = new StationList().GetStations();
+            // gets a list of stations from the function
+            ObservableCollection<Station> stationListSubRow = new StationList().LoadSations();
+            // converts the list to a listcollectionview to add groupdescription
+            ListCollectionView collection = new ListCollectionView(stationListSubRow);
+            // adds the groupdescription to the listview
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("cluster"));
+            // binds datagrid to listview collection
+            stationGrid.ItemsSource = collection;
+
         }
 
         private void stationDateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            // calls update station function when filterdate is changed
             UpdateActiveStations();
         }
 
         public class StationList
         {
-            public List<Station> GetStations()
+            public ObservableCollection<Station> LoadSations()
             {
-                return LoadSations();
-            }
-
-            private List<Station> LoadSations()
-            {
+                // declares webclient
                 using (var webClient = new System.Net.WebClient())
                 {
                     // gets json file
-                    string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                    string clusterjson = webClient.DownloadString("http://data.hisparc.nl/api/subclusters/");
                     //converts .json to list of objects of class Station
-                    List<Station> list = JsonConvert.DeserializeObject<List<Station>>(json);
-                    // loops to objects to add them to the datagrid
+                    ObservableCollection<Station> clusterlist = JsonConvert.DeserializeObject<ObservableCollection<Station>>(clusterjson);
+                    // prepares empty observablecollection for the stations
+                    ObservableCollection<Station> list = new ObservableCollection<Station>();
+                    // loops thru every cluster in clusterlist
+                    foreach (var item in clusterlist)
+                    {
+                        // downloads the stations from the cluster to raw json
+                        string json = webClient.DownloadString("http://data.hisparc.nl/api/subclusters/" + item.stationID);
+                        //converts json to observablecollection
+                        ObservableCollection<Station> clusterliststation = JsonConvert.DeserializeObject<ObservableCollection<Station>>(json);
+                        // loops through all station to add the cluster name to cluster variable in every station and add it to the stationlist
+                        foreach (var i in clusterliststation)
+                        {
+                            i.cluster = item.stationName;
+                            list.Add(i);
+                        }
+                    }
+                    // returns the stationlist to the person who called the function
                     return list;
                 }
             }
@@ -67,6 +88,8 @@ namespace Cosmic_Rays
             public string stationName { get; set; }
 
             public bool activeStation { get; set; }
+
+            public string cluster { get; set; }
         }
 
 
@@ -110,5 +133,7 @@ namespace Cosmic_Rays
                 stationGrid.Items.Refresh();
             }
         }
+
+        
     }
 }
