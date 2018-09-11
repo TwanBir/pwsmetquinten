@@ -29,12 +29,35 @@ namespace Cosmic_Rays
         public MainWindow()
         {
             InitializeComponent();
-            LoadStations();
+            stationGrid.ItemsSource = new StationList().GetStations();
+            stationGrid.group
+            
         }
 
         private void stationDateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateActiveStations();
+            //UpdateActiveStations();
+        }
+
+        public class StationList
+        {
+            public List<Station> GetStations()
+            {
+                return LoadSations();
+            }
+
+            private List<Station> LoadSations()
+            {
+                using (var webClient = new System.Net.WebClient())
+                {
+                    // gets json file
+                    string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
+                    //converts .json to list of objects of class Station
+                    List<Station> list = JsonConvert.DeserializeObject<List<Station>>(json);
+                    // loops to objects to add them to the datagrid
+                    return list;
+                }
+            }
         }
 
         public class Station
@@ -49,23 +72,7 @@ namespace Cosmic_Rays
         }
 
 
-        public void LoadStations()
-        {
-            using (var webClient = new System.Net.WebClient())
-            {
-                // gets json file
-                string json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
-                //converts .json to list of objects of class Station
-                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
-                // loops to objects to add them to the datagrid
-                for (int i = 0; i < stations.Count; i++)
-                {
-                    stationGrid.Items.Add(stations[i]);
-                }
-            }
-        }
-
-        public void UpdateActiveStations()
+        /*public void UpdateActiveStations()
         {
             using (var webClient = new System.Net.WebClient())
             {
@@ -104,44 +111,6 @@ namespace Cosmic_Rays
                 }
                 stationGrid.Items.Refresh();
             }
-        }
-        
-        // Legacy code, remove when in need of more space
-        public void LoadStations_old()
-        {
-            using (var webClient = new System.Net.WebClient())
-            {
-                stationGrid.Items.Clear();
-                string json = null;
-                if (stationDateFilter.SelectedDate > DateTime.Now) { return; }
-                else if (stationDateFilter.Text == "")
-                { 
-                    json = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
-                }
-                    else
-                {
-
-                    DateTime dateTimeFilter = stationDateFilter.SelectedDate ?? DateTime.Now;
-                    textBox.Text = dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd");
-                    //json = webClient.DownloadString("http://data.hisparc.nl/api/stations/data/");
-                    json = webClient.DownloadString($"http://data.hisparc.nl/api/stations/data/" + dateTimeFilter.ToString("yyyy") + "/" + dateTimeFilter.ToString("MM") + "/" + dateTimeFilter.ToString("dd") + "/");
-                }
-                //var json = webClient.DownloadString("http://data.hisparc.nl/api/stations/");
-                //JArray jArray = JArray.Parse(json);
-                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(json);
-                //foreach (JObject item in jArray.Children())
-                //{
-                //    string name = (string)item.SelectToken("name");
-                //    string id = (string)item.SelectToken("number");
-                //
-                //}
-                //textBox.Text = stations[1].stationName;
-                for (int i = 0; i < stations.Count; i++)
-                {
-                    stationGrid.Items.Add(stations[i]);
-                }
-
-            }
-        }
+        }*/
     }
 }
