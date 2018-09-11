@@ -16,6 +16,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Data;
+//for observableclass
+using System.Collections.ObjectModel;
 
 namespace Cosmic_Rays
 {
@@ -45,6 +47,7 @@ namespace Cosmic_Rays
 
             public bool activeStation { get; set; }
         }
+
 
         public void LoadStations()
         {
@@ -99,6 +102,7 @@ namespace Cosmic_Rays
                         item.activeStation = false;
                     }
                 }
+                stationGrid.Items.Refresh();
             }
         }
         
