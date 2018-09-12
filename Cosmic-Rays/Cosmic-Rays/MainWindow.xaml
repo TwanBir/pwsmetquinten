@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cosmic_Rays"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF959595" WindowStyle="ThreeDBorderWindow" >
+        Title="MainWindow" Height="598" Width="1000" Background="#FF959595" WindowStyle="ThreeDBorderWindow" >
+    <Window.Resources>
+    </Window.Resources>
     <Grid Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="361*"/>
@@ -47,9 +49,12 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="334*"/>
+                <ColumnDefinition Width="355*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="button" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,10,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1"/>
+            <Button x:Name="button" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click"/>
         </Grid>
+        <Frame x:Name="TabFrame" Content="Frame" HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Width="376" Grid.RowSpan="2" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
 

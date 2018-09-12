@@ -134,6 +134,9 @@ namespace Cosmic_Rays
             }
         }
 
-        
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            TabFrame.Source = new Uri("tabs/Page1.xaml", UriKind.Relative);
+        }
     }
 }
