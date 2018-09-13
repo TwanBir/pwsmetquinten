@@ -143,7 +143,13 @@ namespace Cosmic_Rays
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            TabFrame.Source = new Uri("tabs/Page1.xaml", UriKind.Relative);
+            Control ctrl = ((Control)sender);
+            TabFrame.Source = new Uri("tabs/"+ctrl.Name+".xaml", UriKind.Relative);
+            foreach (Button item in NavigationButtonGrid.Children)
+            {
+                item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF6E6E6E"));
+            }
+            ctrl.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF959595"));
         }
     }
 }

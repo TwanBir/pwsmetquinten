@@ -44,7 +44,7 @@
         <TextBlock x:Name="textBlock" Grid.Row="2" TextWrapping="Wrap" Text="Voer een datum in om te filteren welke stations actief zijn. Laat leeg voor alle stations" Grid.Column="1" TextAlignment="Center" Margin="10,0" Foreground="White" HorizontalAlignment="Center"/>
         <Rectangle Fill="#FF4D4D4D" Grid.ColumnSpan="3"/>
         <Rectangle Grid.Column="1" Fill="#FF4D4D4D" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Panel.ZIndex="-1"/>
-        <Grid Grid.ColumnSpan="3">
+        <Grid x:Name="NavigationButtonGrid" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -52,7 +52,9 @@
                 <ColumnDefinition Width="334*"/>
                 <ColumnDefinition Width="355*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="button" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click"/>
+            <Button x:Name="Tab1" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,-1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click"/>
+            <Button x:Name="tab2" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,-1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click" Grid.Column="1"/>
+            <Button x:Name="tab3" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,-1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click" Grid.Column="2"/>
         </Grid>
         <Frame x:Name="TabFrame" Content="Frame" Grid.Row="1" Grid.RowSpan="2" NavigationUIVisibility="Hidden" />
     </Grid>
