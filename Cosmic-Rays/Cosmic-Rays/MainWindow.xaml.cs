@@ -145,11 +145,11 @@ namespace Cosmic_Rays
         {
             Control ctrl = ((Control)sender);
             TabFrame.Source = new Uri("tabs/"+ctrl.Name+".xaml", UriKind.Relative);
-            foreach (Button item in NavigationButtonGrid.Children)
+            foreach (Control item in TabButtonGrid.Children)
             {
-                item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF6E6E6E"));
+                item.Background = new SolidColorBrush(Color.FromArgb(255, 110, 110, 110));
             }
-            ctrl.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF959595"));
+            ctrl.Background = new SolidColorBrush(Color.FromArgb(255, 149, 149, 149));
         }
     }
 }
