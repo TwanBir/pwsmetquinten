@@ -26,13 +26,15 @@ namespace Cosmic_Rays
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             // gets a list of stations from the function
-            ObservableCollection<Station> stationListSubRow = new StationList().LoadSations();
+            ObservableCollection<Station> stationListSubRow = new StationList().loadSations();
             // converts the list to a listcollectionview to add groupdescription
             ListCollectionView collection = new ListCollectionView(stationListSubRow);
+            
             // adds the groupdescription to the listview
             collection.GroupDescriptions.Add(new PropertyGroupDescription("cluster"));
             // binds datagrid to listview collection
@@ -48,7 +50,12 @@ namespace Cosmic_Rays
 
         public class StationList
         {
-            public ObservableCollection<Station> LoadSations()
+            public ObservableCollection<Station> loadSations()
+            {
+                return initStations();
+            }
+
+            public ObservableCollection<Station> initStations()
             {
                 // declares webclient
                 using (var webClient = new System.Net.WebClient())

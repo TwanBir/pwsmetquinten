@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+// add observable collections
+using System.Collections.ObjectModel;
+// add json usage
+using Newtonsoft.Json;
 
 namespace Cosmic_Rays.tabs
 {

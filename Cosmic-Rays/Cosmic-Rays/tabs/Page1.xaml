@@ -7,9 +7,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
-
-    <Grid>
-        <Rectangle Fill="#FF4D4D4D" HorizontalAlignment="Left" Height="203" Margin="96,96,0,0" VerticalAlignment="Top" Width="417"/>
-
+    <Grid Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.552">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="103"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="328*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="2,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="200" Text="test 1 2 3"/>
     </Grid>
 </Page>
