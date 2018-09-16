@@ -1,5 +1,5 @@
 ﻿PUBLICDB_BASE= http://data.hisparc.nl
-base url: http://data.hisparc.nl/date/
+base url: http://data.hisparc.nl/data/
 get_api_base = http://data.hisparc.nl/api/
 get_src_base = http://data.hisparc.nl/show/source/
 coincidence_number = http://data.hisparc.nl/

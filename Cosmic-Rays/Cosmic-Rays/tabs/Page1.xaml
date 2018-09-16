@@ -38,6 +38,6 @@
         <TextBlock x:Name="textBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="39,0,0,0" Grid.Row="3" TextWrapping="Wrap" Text="- Stations" Padding="5,1" VerticalAlignment="Center" TextAlignment="Center" Background="#FFC3C3C3"/>
         <Rectangle Grid.ColumnSpan="1" Grid.Column="1" Fill="White" Grid.Row="3" Panel.ZIndex="-1" Margin="3,0,1,0" Width="80" HorizontalAlignment="Left"/>
         <Button x:Name="button" Grid.ColumnSpan="3" Content="Bereken aantal coïncidenties" HorizontalAlignment="Center" Margin="0,10" Grid.Row="4" VerticalAlignment="Center" Padding="5,1" Grid.Column="1" Click="button_Click"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Right" Margin="0" Grid.Row="5" TextWrapping="Wrap" Text="Aantal coïncidenties:" VerticalAlignment="Center" Padding="0,0,5,0"/>
+        <TextBlock x:Name="coincidenties" HorizontalAlignment="Right" Margin="0" Grid.Row="5" TextWrapping="Wrap" Text="Aantal coïncidenties:" VerticalAlignment="Center" Padding="0,0,5,0"/>
     </Grid>
 </Page>

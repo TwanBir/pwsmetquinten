@@ -17,7 +17,7 @@ using System.Collections.ObjectModel;
 // add json usage
 using Newtonsoft.Json;
 // add url encode
-using System.Net.Http;
+using System.Net;
 
 
 namespace Cosmic_Rays.tabs
@@ -38,7 +38,10 @@ namespace Cosmic_Rays.tabs
             var startDate = BeginDate.SelectedDate;
             var endDate = EndDate.SelectedDate;
             var n = StationCount;
-
+            var stations = 502;
+            string encodec_string = WebUtility.UrlEncode("{'cluster': " + null + ", 'stations': "+stations+", 'start': "+startDate+", 'end': "+endDate+", 'n': "+n+"}");
+            coincidenties.Text = encodec_string;
         }
+        
     }
 }
