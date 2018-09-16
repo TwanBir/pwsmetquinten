@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 // add json usage
 using Newtonsoft.Json;
+// add url encode
+using System.Net.Http;
+
 
 namespace Cosmic_Rays.tabs
 {
@@ -27,6 +30,15 @@ namespace Cosmic_Rays.tabs
         public Page1()
         {
             InitializeComponent();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            var base_url = "http://data.hisparc.nl/data/network/coincidences/?{0}";
+            var startDate = BeginDate.SelectedDate;
+            var endDate = EndDate.SelectedDate;
+            var n = StationCount;
+
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿PUBLICDB_BASE= http://data.hisparc.nl
+base url: http://data.hisparc.nl/date/
+get_api_base = http://data.hisparc.nl/api/
+get_src_base = http://data.hisparc.nl/show/source/
+coincidence_number = http://data.hisparc.nl/
+get_coincidences_url() = http://data.hisparc.nl/network/coincidences/?{query}
+query = cluster=Aarhus&stations=None&start=2013-09-01+00%3A00%3A00&end=2013-09-02+00%3A00%3A00&n=3
