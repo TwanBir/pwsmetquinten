@@ -55,7 +55,7 @@
             <Button x:Name="Page1" Content="Coïncidenties" HorizontalAlignment="Left" Margin="10,5,0,-1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click"/>
             <Button x:Name="Page2" Content="Tab 2" HorizontalAlignment="Left" Margin="10,5,0,-1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" Background="#FF6E6E6E" Foreground="White" BorderBrush="{x:Null}" Padding="5,1" Click="button_Click" Grid.Column="1"/>
         </Grid>
-        <Frame x:Name="TabFrame" Content="Frame" Grid.Row="1" Grid.RowSpan="2" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="TabFrame" Content="" Grid.Row="1" Grid.RowSpan="2" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
 
